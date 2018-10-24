@@ -5,6 +5,7 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+  <link rel="stylesheet" href="./style/style.css">
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -19,22 +20,80 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Fantasy Football</title>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div class="wrap">
+      <div id="arrow-left" class="arrow"></div>
+      <div id="slider">
+          <div class="slide slide1">
+              <div class="slide-content">
+                  <span>Football</span>
+              </div>
+          </div>
+          <div class="slide slide2">
+              <div class="slide-content">
+                  <span>Football Stadium Blur</span>
+              </div>
+          </div>
+          <div class="slide slide3">
+              <div class="slide-content">
+                  <span>Referees</span>
+              </div>
+          </div>
+      </div>
+      <div id="arrow-right" class="arrow"></div>
+  </div>
+  <script>
+  let sliderImages = document.querySelectorAll('.slide'),
+  arrowLeft = document.querySelector('#arrow-left'),
+  arrowRight = document.querySelector('#arrow-right'),
+  current = 0;
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+//clear all images
+  function reset(){
+      for(let i = 0; i < sliderImages.length; i++){
+          sliderImages[i].style.display = 'none';
+      }
+  }
+//Initialize the slider
+  function startSlide(){
+      reset();
+      sliderImages[0].style.display = 'block';
+  }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+  //Show previous slide
+  function slideLeft(){
+      reset();
+      sliderImages[current - 1].style.display = 'block';
+      current--;
+  }
+   //Show next slide
+   function slideRight(){
+      reset();
+      sliderImages[current + 1].style.display = 'block';
+      current++;
+  }
+  //left arrow click - event listener
+  arrowLeft.addEventListener('click', function(){
+      if(current ===0){
+          current = sliderImages.length;
+      }
+      slideLeft();
+  });
+  //Rightt arrow click - event listener
+  arrowRight.addEventListener('click', function(){
+      if(current ===0){
+          current = sliderImages.length;
+      }
+      slideRight();
+  });
+
+  startSlide();
+  </script>
   </body>
 </html>
