@@ -33,5 +33,15 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  live: function(req, res) {
+    
+    var fantasydata = require("../external/fantasydata.js");
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/8/HOU";
+
+    fantasydata(url, function(data) {
+        res.json(data);
+    });
+
   }
 };

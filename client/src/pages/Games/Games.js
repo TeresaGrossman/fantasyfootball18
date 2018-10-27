@@ -22,7 +22,7 @@ class Games extends Component {
   loadGames = () => {
     API.getGames()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ games: res.data, user: "", team: "", players: "" })
       )
       .catch(err => console.log(err));
   };
