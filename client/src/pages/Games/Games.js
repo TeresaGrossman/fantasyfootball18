@@ -7,29 +7,29 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 
-class Books extends Component {
+class Games extends Component {
   state = {
-    books: [],
-    title: "",
-    author: "",
-    synopsis: ""
+    games: [],
+    user: "",
+    team: "",
+    players: ""
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.loadGames();
   }
 
-  loadBooks = () => {
-    API.getBooks()
+  loadGames = () => {
+    API.getGames()
       .then(res =>
-        this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+        this.setState({ games: res.data, user: "", team: "", players: "" })
       )
       .catch(err => console.log(err));
   };
 
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
+  deleteGame = id => {
+    API.deleteGame(id)
+      .then(res => this.loadGames())
       .catch(err => console.log(err));
   };
 
@@ -42,13 +42,13 @@ class Books extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    if (this.state.title && this.state.author) {
-      API.saveBook({
-        title: this.state.title,
-        author: this.state.author,
-        synopsis: this.state.synopsis
+    if (this.state.user && this.state.team) {
+      API.saveGame({
+        user: this.state.user,
+        team: this.state.team,
+        players: this.state.players
       })
-        .then(res => this.loadBooks())
+        .then(res => this.loadGames())
         .catch(err => console.log(err));
     }
   };
@@ -59,49 +59,49 @@ class Books extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What Books Should I Read?</h1>
+              <h1>What should MY Team Be?</h1>
             </Jumbotron>
             <form>
               <Input
-                value={this.state.title}
+                value={this.state.User}
                 onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)"
+                name="user"
+                placeholder="User (required)"
               />
               <Input
-                value={this.state.author}
+                value={this.state.Team}
                 onChange={this.handleInputChange}
-                name="author"
-                placeholder="Author (required)"
+                name="team"
+                placeholder="Team (required)"
               />
               <TextArea
-                value={this.state.synopsis}
+                value={this.state.Players}
                 onChange={this.handleInputChange}
-                name="synopsis"
-                placeholder="Synopsis (Optional)"
+                name="players"
+                placeholder="Players (Optional)"
               />
               <FormBtn
-                disabled={!(this.state.author && this.state.title)}
+                disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
               >
-                Submit Book
+                Submit Team
               </FormBtn>
             </form>
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Books On My List</h1>
+              <h1>Games List</h1>
             </Jumbotron>
-            {this.state.books.length ? (
+            {this.state.games.length ? (
               <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <Link to={"/books/" + book._id}>
+                {this.state.games.map(game => (
+                  <ListItem key={game._id}>
+                    <Link to={"/games/" + game._id}>
                       <strong>
-                        {book.title} by {book.author}
+                        {game.user} by {game.team}
                       </strong>
                     </Link>
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    <DeleteBtn onClick={() => this.deleteGame(game._id)} />
                   </ListItem>
                 ))}
               </List>
@@ -115,4 +115,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default Games;

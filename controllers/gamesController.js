@@ -1,37 +1,47 @@
 const db = require("../models");
 
-// Defining methods for the booksController
+// Defining methods for the gamesController
 module.exports = {
   findAll: function(req, res) {
-    db.Book
+    db.Game
       .find(req.query)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Book
+    db.Game
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Book
+    db.Game
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Book
+    db.Game
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Book
+    db.Game
       .findById({ _id: req.params.id })
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  live: function(req, res) {
+    
+    var fantasydata = require("../external/fantasydata.js");
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/8/HOU";
+
+    fantasydata(url, function(data) {
+        res.json(data);
+    });
+
   }
 };
