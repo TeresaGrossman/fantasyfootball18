@@ -37,7 +37,9 @@ module.exports = {
   live: function(req, res) {
     
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/8/HOU";
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/8/NE";
+   
+    
 
     fantasydata(url, function(data) {
         res.json(data);

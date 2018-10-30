@@ -17,8 +17,10 @@ function doFantasyAPI(url, cb) {
         if (!error && response.statusCode === 200) {
             var gameData = JSON.parse(body);
             var returnValues = {
+                homeScore: gameData.Score.HomeScore,
                 awayScore: gameData.Score.AwayScore,
-                homeScore: gameData.Score.HomeScore
+                inProgess: gameData.IsInProgress,
+               
             };
             cb(returnValues);
         } else {
@@ -31,4 +33,5 @@ function doFantasyAPI(url, cb) {
 }
 
 module.exports = doFantasyAPI;
+
 

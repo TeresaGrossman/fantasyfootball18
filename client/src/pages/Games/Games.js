@@ -78,7 +78,7 @@ class Games extends Component {
                 value={this.state.Players}
                 onChange={this.handleInputChange}
                 name="players"
-                placeholder="Players (Optional)"
+                placeholder="Players (required)"
               />
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
