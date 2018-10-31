@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Games from "./pages/Games";
 import LiveGames from "./pages/LiveGames";
+import Player from "./pages/Player";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
@@ -14,6 +15,7 @@ const App = () => (
         <Route exact path="/" component={Games} />
         <Route exact path="/games" component={Games} />
         <Route exact path="/livegames" component={LiveGames} />
+        <Route exact path="/player/:id" component={Player} />
         <Route exact path="/games/:id" component={Detail} />
         <Route component={NoMatch} />
       </Switch>

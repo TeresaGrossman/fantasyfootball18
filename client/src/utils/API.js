@@ -8,6 +8,9 @@ export default {
   getLiveGames: function() {
     return axios.get("/api/games/live");
   },
+  getPlayer: function(id) {
+    return axios.get("/api/games/player/" + id);
+  },
   // Gets the game with the given id
   getGame: function(id) {
     return axios.get("/api/games/" + id);
