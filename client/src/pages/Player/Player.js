@@ -29,7 +29,7 @@ class Player extends Component {
   }
 
   loadPlayer = () => {
-    API.getPlayer(this.props.match.params.id)
+    API.getPlayer(this.props.match.params.week_id, this.props.match.params.id)
       .then(res => this.setState({
         name: res.data.name,
         passingYards: res.data.passingYards,

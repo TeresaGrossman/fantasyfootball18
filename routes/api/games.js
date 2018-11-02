@@ -10,7 +10,7 @@ router.route("/")
  router.route("/live")
  .get(gamesController.live);
 
- router.route("/player/:id")
+ router.route("/player/:week_id/:id")
  .get(gamesController.player);
  
  // Matches with "/api/games/:id"
