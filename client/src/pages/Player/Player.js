@@ -21,7 +21,8 @@ class Player extends Component {
   state = {
     name:"",
     passingYards: 0,
-    passingTouchdowns: 0
+    passingTouchdowns: 0,
+   
   }
 
   componentDidMount() {
@@ -33,7 +34,7 @@ class Player extends Component {
       .then(res => this.setState({
         name: res.data.name,
         passingYards: res.data.passingYards,
-        passingTouchdowns: res.data.passingTouchdowns
+        passingTouchdowns: res.data.passingTouchdowns,
           })
       )
       .catch(err => console.log(err));

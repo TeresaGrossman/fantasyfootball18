@@ -43,6 +43,7 @@ class Games extends Component {
     return (
       <div>
         <br></br>
+        <br></br>
         <h4> SCORE </h4>
         <div>Home: {this.state.awayScore}</div>
         <div>Away: {this.state.homeScore}</div>

@@ -98,7 +98,7 @@ class Games extends Component {
                   <ListItem key={game._id}>
                     <Link to={"/games/" + game._id}>
                       <strong>
-                        {game.user} by {game.team}
+                        {game.user}'s Team is {game.team}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteGame(game._id)} />

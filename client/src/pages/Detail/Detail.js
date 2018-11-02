@@ -23,7 +23,7 @@ class Detail extends Component {
           <Col size="md-12">
             <Jumbotron>
               <h1>
-                {this.state.game.user} by {this.state.game.team}
+                {this.state.game.user}'s Team is {this.state.game.team}
               </h1>
             </Jumbotron>
           </Col>

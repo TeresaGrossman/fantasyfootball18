@@ -37,7 +37,8 @@ module.exports = {
   live: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/8/"  + req.params.id;
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF" ;
+   
 
     fantasydata(url, function (data) {
       var returnValues = {
@@ -51,17 +52,24 @@ module.exports = {
   player: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/8/" + req.params.id;
-
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/9/" + req.params.id; ; 
+    
+    
     fantasydata(url, function (data) {
       var returnValues = {
           name: data.Name,
-          passingTouchdowns: data.PassingTouchdowns,
-          passingYards: data.PassingYards
+          passingYards: data.PassingYards,
+          passingTouchdowns: data.PassingTouchdowns
+          
+          
       };
       res.json(returnValues);
     });
 
   }
+  
+
+  
+
 
 };

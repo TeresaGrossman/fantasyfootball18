@@ -6,7 +6,7 @@ export default {
     return axios.get("/api/games");
   },
   getLiveGames: function() {
-    return axios.get("/api/games/live");
+    return axios.get("/api/games/live/");
   },
   getPlayer: function(id) {
     return axios.get("/api/games/player/" + id);
