@@ -37,67 +37,46 @@ module.exports = {
   live: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF"; 
-    // + req.params.id;
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
+
     fantasydata(url, function (data) {
       var returnValues = {
           homeScore: data.Score.HomeScore,
           awayScore: data.Score.AwayScore,
+          forecastDescription: data.Score.ForecastDescription,
       };
       res.json(returnValues);
     });
 
   },
-  player: function (req, res) {
+  // weather: function (req, res) {
+
+  //   var fantasydata = require("../external/fantasydata.js");
+  //   var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
+
+  //   fantasydata(url, function (data) {
+  //     var returnValues = {
+  //         forecastDescription: data.Score.ForecastDescription,
+  //     };
+  //     res.json(returnValues);
+  //   })
+
+  // },
+  team: function (req, res) {
 
     
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/" + req.params.week_id + "/" + req.params.id;
 
     fantasydata(url, function (data) {
       var returnValues = {
-          name: data.Name,
-          passingYards: data.PassingYards,
-          passingTouchdowns: data.PassingTouchdowns
-          
+         GameDate: data.GameDate
           
       };
       res.json(returnValues);
-    });
-
-    const team = [
-      {
-        playerId: 19330,
-        name: "",
-        position: 'QB'
-      },
-        {
-        playerId: 6767,
-        name: "",
-        position: 'WR'
-      },
-      {
-        playerId: 0,
-        name: "",
-        position: 'RB'
-      }
-    ] 
-    const teamPlayers = []
-    for (i=0;i<team.length;i++){
-    
-      let player = {}
-    
-      player.id = team[i].playerId
-      
-      teamPlayers.push(player)
-    }
-        
-    console.log(teamPlayers)
+      console.log(hello);
+    });  
 
   }
   
-
-  
-
-
 };

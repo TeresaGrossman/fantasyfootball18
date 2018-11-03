@@ -8,8 +8,8 @@ export default {
   getLiveGames: function() {
     return axios.get("/api/games/live/");
   },
-  getPlayer: function(week_id, id) {
-    return axios.get("/api/games/player/" + week_id + "/" + id);
+  getTeam: function(week_id, id) {
+    return axios.get("/api/games/team/" + week_id + "/" + id);
   },
   // Gets the game with the given id
   getGame: function(id) {

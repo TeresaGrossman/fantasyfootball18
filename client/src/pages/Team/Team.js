@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 
-class Player extends Component {
+class Team extends Component {
 
 
   /** TUTOR SESSION PSEUDO 10/29/18
@@ -19,22 +19,19 @@ class Player extends Component {
 
 
   state = {
-    name:"",
-    passingYards: 0,
-    passingTouchdowns: 0,
+   gamedate: ""
    
   }
 
   componentDidMount() {
-    this.loadPlayer();
+    this.loadTeam();
   }
 
-  loadPlayer = () => {
-    API.getPlayer(this.props.match.params.week_id, this.props.match.params.id)
+  loadTeam = () => {
+    API.getTeam(this.props.match.params.week_id, this.props.match.params.id)
       .then(res => this.setState({
-        name: res.data.name,
-        passingYards: res.data.passingYards,
-        passingTouchdowns: res.data.passingTouchdowns,
+        gamedate: res.data.GameDate
+       
           })
       )
       .catch(err => console.log(err));
@@ -45,13 +42,11 @@ class Player extends Component {
       <div>
         <br></br>
         <br></br>
-        <h4>PLAYER</h4>
-        <div>{this.state.name}</div>
-        <div>{this.state.passingYards}</div>
-        <div>{this.state.passingTouchdowns}</div>
+        <h4>TEAM</h4>
+        <div>Team Data: {this.state.gamedate}</div>
       </div>
     );
   }
 }
 
-export default Player;
+export default Team;
