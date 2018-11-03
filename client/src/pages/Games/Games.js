@@ -6,6 +6,21 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import BackgroundImage from "../../components/FF.jpg";
+// const anotherWay = require('../../components/FF.jpg');
+
+const styles = {
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  myBkg:{
+    background: `url(${BackgroundImage})`,
+    backgroundSize: 'cover',
+    repeat: 'no-repeat',
+  }
+};
 
 class Games extends Component {
   state = {
@@ -55,7 +70,9 @@ class Games extends Component {
 
   render() {
     return (
-      <Container fluid>
+
+      <Container fluid style={styles.myBkg}>
+            {/* <img src={BackgroundImage} style={styles.container} /> */}
         <Row>
           <Col size="md-6">
             <Jumbotron>
@@ -111,8 +128,10 @@ class Games extends Component {
           </Col>
         </Row>
       </Container>
+
     );
   }
 }
+
 
 export default Games;
