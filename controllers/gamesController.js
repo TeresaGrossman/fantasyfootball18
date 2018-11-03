@@ -37,13 +37,8 @@ module.exports = {
   live: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-<<<<<<< HEAD
-    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF"; 
-    // + req.params.id;
-=======
     var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
 
->>>>>>> 9fb7be9787d9b0516c6b2f598eeea7d87565c337
     fantasydata(url, function (data) {
       var returnValues = {
           homeScore: data.Score.HomeScore,
@@ -60,19 +55,7 @@ module.exports = {
     });
 
   },
-  // weather: function (req, res) {
 
-  //   var fantasydata = require("../external/fantasydata.js");
-  //   var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
-
-  //   fantasydata(url, function (data) {
-  //     var returnValues = {
-  //         forecastDescription: data.Score.ForecastDescription,
-  //     };
-  //     res.json(returnValues);
-  //   })
-
-  // },
   player: function (req, res) {
 
     
