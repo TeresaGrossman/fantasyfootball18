@@ -49,6 +49,12 @@ module.exports = {
           homeScore: data.Score.HomeScore,
           awayScore: data.Score.AwayScore,
           forecastDescription: data.Score.ForecastDescription,
+          timeRemaining: data.Score.TimeRemaining,
+          isOver: data.Score.IsOver,
+          quarter: data.Score.Quarter,
+          down: data.Score.Down,
+          yardLine: data.Score.YardLine,
+          lastUpdated: data.Score.LastUpdated
       };
       res.json(returnValues);
     });
