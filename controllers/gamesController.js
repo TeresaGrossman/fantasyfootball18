@@ -38,18 +38,23 @@ module.exports = {
 
     var fantasydata = require("../external/fantasydata.js");
     var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
-
+    // + req.params.id;;
     fantasydata(url, function (data) {
       var returnValues = {
           homeScore: data.Score.HomeScore,
           awayScore: data.Score.AwayScore,
           forecastDescription: data.Score.ForecastDescription,
+          forecastTempLow: data.Score.ForecastTempLow,
+          forecastTempHigh: data.Score.ForecastTempHigh,
+          forecastWindChill: data.Score.ForecastWindChill,
+          forecastWindSpeed: data.Score.ForecastWindSpeed,
           timeRemaining: data.Score.TimeRemaining,
           isOver: data.Score.IsOver,
           quarter: data.Score.Quarter,
           down: data.Score.Down,
           yardLine: data.Score.YardLine,
           lastUpdated: data.Score.LastUpdated
+
       };
       res.json(returnValues);
     });
