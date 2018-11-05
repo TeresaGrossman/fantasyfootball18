@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// Defining methods for the gamesController
+// Defining methods for the gamesController Mongoose DB //
 module.exports = {
   findAll: function (req, res) {
     db.Game
@@ -35,7 +35,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  // Live API URL
+  // Live API URL grabs general game stats
   live: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
@@ -62,7 +62,9 @@ module.exports = {
 
   },
 
-  // Player API URL
+
+
+  // Player API URL with loop to grab 6 players
   player: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
@@ -78,17 +80,79 @@ module.exports = {
         receivingYards: data.ReceivingYards,
         receivingTouchdowns: data.ReceivingTouchdowns
 
-
       };
+
       res.json(returnValues);
     });
+    
+    const team = [
+      {
+        playerId: 4314,
+        name: "",
+        position: 'QB'
+      },
+      {
+        playerId: 8355,
+        name: "",
+        position: 'WR'
+      },
+      {
+        playerId: 15150,
+        name: "",
+        position: 'RB'
+      },
+      {
+        playerId: 2593,
+        name: "",
+        position: 'QB'
+      },
+      {
+        playerId: 13227,
+        name: "",
+        position: 'WR'
+      },
+      {
+        playerId: 18995,
+        name: "",
+        position: 'RB'
+      }
+    ]
+    // const teamPlayers = []
+    // for (i = 0; i < team.length; i++) {
+
+    //   let player = {}
+    //   player.id = team[i].playerId
+    //   teamPlayers.push(player)
+    // }
+
+    const teamPlayers = team.map((player) => {
+      return {
+        id: player.playerId,
+        // name: player.name
+      }
+
+    })
+    
+    console.log(teamPlayers);
+   
   },
+// from fantasy datat API documentation //
+    //   getPlayerGameStatsByPlayerPromise(season, week, playerid){
+    //     var parameters = {};
+    //     parameters['season']=season;
+    //     parameters['week']=week;
+    //     parameters['playerid']=playerid;
+    //     return this.GetPromise('/v3/nfl/stats/{format}/PlayerGameStatsByPlayerID/2018REG/' + req.params.week_id + "/" + req.params.id
+    // }
+
+
+    
 
   // Team API URL 
   team: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/9/KC"; 
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/9/TEN";
     // + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {
@@ -109,3 +173,5 @@ module.exports = {
 
 
 }; //end module export
+
+

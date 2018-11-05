@@ -16,7 +16,7 @@ class Team extends Component {
      * create variable outside of for loop to save player data
     */
 
-
+// players API to React page //
 
     state = {
         gameKey: "",

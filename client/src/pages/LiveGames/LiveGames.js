@@ -16,7 +16,7 @@ class Games extends Component {
    * create variable outside of for loop to save player data
   */
 
-
+// livegames API to React page //
 
   state = {
     awayScore: 0,

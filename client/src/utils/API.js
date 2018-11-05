@@ -5,12 +5,15 @@ export default {
   getGames: function() {
     return axios.get("/api/games");
   },
+  // Gets live games for FF 
   getLiveGames: function(week_id, id) {
     return axios.get("/api/games/live/" + week_id + "/" + id);
   },
+  // Gets specific player by ID for that exact game
   getPlayer: function(week_id, id) {
     return axios.get("/api/games/player/" + week_id + "/" + id);
   },
+  // Gets players on that team
   getTeam: function() {
     return axios.get("/api/games/team/");
   },
