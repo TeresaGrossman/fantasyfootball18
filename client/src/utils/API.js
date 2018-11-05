@@ -5,11 +5,14 @@ export default {
   getGames: function() {
     return axios.get("/api/games");
   },
-  getLiveGames: function() {
-    return axios.get("/api/games/live/");
+  getLiveGames: function(week_id, id) {
+    return axios.get("/api/games/live/" + week_id + "/" + id);
   },
   getPlayer: function(week_id, id) {
     return axios.get("/api/games/player/" + week_id + "/" + id);
+  },
+  getTeam: function() {
+    return axios.get("/api/games/team/");
   },
   // Gets the game with the given id
   getGame: function(id) {

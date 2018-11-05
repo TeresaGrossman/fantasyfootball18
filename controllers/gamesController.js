@@ -34,26 +34,27 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
+  // Live API URL
   live: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/9/SF";
-    // + req.params.id;;
+    var url = "https://api.fantasydata.net/v3/nfl/pbp/JSON/PlayByPlay/2018REG/" + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {
-          homeScore: data.Score.HomeScore,
-          awayScore: data.Score.AwayScore,
-          forecastDescription: data.Score.ForecastDescription,
-          forecastTempLow: data.Score.ForecastTempLow,
-          forecastTempHigh: data.Score.ForecastTempHigh,
-          forecastWindChill: data.Score.ForecastWindChill,
-          forecastWindSpeed: data.Score.ForecastWindSpeed,
-          timeRemaining: data.Score.TimeRemaining,
-          isOver: data.Score.IsOver,
-          quarter: data.Score.Quarter,
-          down: data.Score.Down,
-          yardLine: data.Score.YardLine,
-          lastUpdated: data.Score.LastUpdated
+        homeScore: data.Score.HomeScore,
+        awayScore: data.Score.AwayScore,
+        forecastDescription: data.Score.ForecastDescription,
+        forecastTempLow: data.Score.ForecastTempLow,
+        forecastTempHigh: data.Score.ForecastTempHigh,
+        forecastWindChill: data.Score.ForecastWindChill,
+        forecastWindSpeed: data.Score.ForecastWindSpeed,
+        timeRemaining: data.Score.TimeRemaining,
+        isOver: data.Score.IsOver,
+        quarter: data.Score.Quarter,
+        down: data.Score.Down,
+        yardLine: data.Score.YardLine,
+        lastUpdated: data.Score.LastUpdated
 
       };
       res.json(returnValues);
@@ -61,56 +62,50 @@ module.exports = {
 
   },
 
+  // Player API URL
   player: function (req, res) {
 
-    
     var fantasydata = require("../external/fantasydata.js");
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
-
     fantasydata(url, function (data) {
       var returnValues = {
-          name: data.Name,
-          passingYards: data.PassingYards,
-          passingTouchdowns: data.PassingTouchdowns
-          
-          
+        name: data.Name,
+        position: data.Position,
+        passingYards: data.PassingYards,
+        passingTouchdowns: data.PassingTouchdowns,
+        rushingYards: data.RushingYards,
+        rushingTouchdowns: data.RushingTouchdowns,
+        receivingYards: data.ReceivingYards,
+        receivingTouchdowns: data.ReceivingTouchdowns
+
+
       };
       res.json(returnValues);
     });
+  },
 
-    const team = [
-      {
-        playerId: 19330,
-        name: "",
-        position: 'QB'
-      },
-        {
-        playerId: 6767,
-        name: "",
-        position: 'WR'
-      },
-      {
-        playerId: 0,
-        name: "",
-        position: 'RB'
-      }
-    ] 
-    const teamPlayers = []
-    for (i=0;i<team.length;i++){
-    
-      let player = {}
-    
-      player.id = team[i].playerId
-      
-      teamPlayers.push(player)
-    }
-        
-    console.log(teamPlayers)
+  // Team API URL 
+  team: function (req, res) {
 
+    var fantasydata = require("../external/fantasydata.js");
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/9/KC"; 
+    // + req.params.week_id + "/" + req.params.id;
+    fantasydata(url, function (data) {
+      var returnValues = {
+        gameKey: data.GameKey,
+        name: data.Name,
+        position: data.Position,
+        passingYards: data.PassingYards,
+        passingTouchdowns: data.PassingTouchdowns,
+        rushingYards: data.RushingYards,
+        rushingTouchdowns: data.RushingTouchdowns,
+        receivingYards: data.ReceivingYards,
+        receivingTouchdowns: data.ReceivingTouchdowns
+
+      };
+      res.json(returnValues);
+    });
   }
-  
-
-  
 
 
-};
+}; //end module export

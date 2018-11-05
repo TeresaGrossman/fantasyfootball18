@@ -27,7 +27,6 @@ class Games extends Component {
     forecastWindChill: 0,
     forecastWindSpeed: 0,
     timeRemaining: 0,
-    isOver: true,
     quarter: "",
     down: 0,
     yardLine: 0,
@@ -41,8 +40,10 @@ class Games extends Component {
     this.loadLiveGames();
   }
 
-  loadLiveGames = () => {
-    API.getLiveGames()
+  // loadLiveGames = () => {
+  //   API.getLiveGames()
+    loadLiveGames = () => {
+      API.getLiveGames(this.props.match.params.week_id, this.props.match.params.id)
       .then(res => this.setState({
         awayScore: res.data.awayScore,
         homeScore: res.data.homeScore,
@@ -52,7 +53,6 @@ class Games extends Component {
         forecastWindChill: res.data.forecastWindChill,
         forecastWindSpeed: res.data.forecastWindSpeed,
         timeRemaining: res.data.timeRemaining,
-        isOver: res.data.isOver,
         quarter: res.data.quarter,
         down: res.data.down,
         yardLine: res.data.yardLine,
@@ -78,7 +78,6 @@ class Games extends Component {
         <div>Wind Chill: {this.state.forecastWindChill}</div>
         <div>Wind Speed: {this.state.forecastWindSpeed}</div>
         <div>Time Left: {this.state.timeRemaining}</div>
-        <div>Game Status: {this.state.isOver}</div>
         <div>Quarter: {this.state.quarter}</div>
         <div>Down: {this.state.down}</div>
         <div>Yard Line: {this.state.yardLine}</div>

@@ -20,8 +20,13 @@ class Player extends Component {
 
   state = {
     name:"",
+    position: "",
     passingYards: 0,
     passingTouchdowns: 0,
+    rushingYards: 0,
+    rushingTouchdowns: 0,
+    receivingYards: 0,
+    receivingTouchdowns: 0
    
   }
 
@@ -33,8 +38,13 @@ class Player extends Component {
     API.getPlayer(this.props.match.params.week_id, this.props.match.params.id)
       .then(res => this.setState({
         name: res.data.name,
+        position: res.data.position,
         passingYards: res.data.passingYards,
         passingTouchdowns: res.data.passingTouchdowns,
+        rushingYards: res.data.rushingYards,
+        rushingTouchdowns: res.data.rushingTouchdowns,
+        receivingYards: res.data.receivingYards,
+        receivingTouchdowns: res.data.receivingTouchdowns
           })
       )
       .catch(err => console.log(err));
@@ -46,9 +56,14 @@ class Player extends Component {
         <br></br>
         <br></br>
         <h4>PLAYER</h4>
-        <div>{this.state.name}</div>
-        <div>{this.state.passingYards}</div>
-        <div>{this.state.passingTouchdowns}</div>
+        <div>Name: {this.state.name}</div>
+        <div>Position: {this.state.position}</div>
+        <div>PasYrds: {this.state.passingYards}</div>
+        <div>PasTD: {this.state.passingTouchdowns}</div>
+        <div>RusYrds: {this.state.rushingYards}</div>
+        <div>RusTD: {this.state.rushingTouchdowns}</div>
+        <div>RecYrds: {this.state.receivingYards}</div>
+        <div>RecTD: {this.state.receivingTouchdowns}</div>
       </div>
     );
   }
