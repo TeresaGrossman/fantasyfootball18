@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
+
 
 class Detail extends Component {
   state = {
@@ -16,16 +16,12 @@ class Detail extends Component {
       .catch(err => console.log(err));
   }
 
+
   render() {
     return (
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>
-                {this.state.game.user} by {this.state.game.team}
-              </h1>
-            </Jumbotron>
           </Col>
         </Row>
         <Row>
