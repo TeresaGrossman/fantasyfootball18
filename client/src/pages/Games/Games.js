@@ -76,7 +76,7 @@ class Games extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What should MY Team Be?</h1>
+              <h1>Pick Your Team!</h1>
             </Jumbotron>
             <form>
               <Input
@@ -91,12 +91,14 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-              <TextArea
-                value={this.state.Players}
-                onChange={this.handleInputChange}
-                name="players"
-                placeholder="Players (required)"
-              />
+              <List>
+                <ListItem>QB</ListItem>
+                <ListItem>WR</ListItem>
+                <ListItem>RB</ListItem>
+                <ListItem>QB</ListItem>
+                <ListItem>WR</ListItem>
+                <ListItem>RB</ListItem>
+              </List>
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
@@ -107,7 +109,7 @@ class Games extends Component {
           </Col>
           <Col size="md-6 sm-12">
             <Jumbotron>
-              <h1>Games List</h1>
+              <h1>My Team</h1>
             </Jumbotron>
             {this.state.games.length ? (
               <List>
@@ -115,7 +117,7 @@ class Games extends Component {
                   <ListItem key={game._id}>
                     <Link to={"/games/" + game._id}>
                       <strong>
-                        {game.user} by {game.team}
+                        {game.team} by {game.user}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteGame(game._id)} />
