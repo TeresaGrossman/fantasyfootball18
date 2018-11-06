@@ -69,7 +69,12 @@ module.exports = {
 
     var fantasydata = require("../external/fantasydata.js");
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
+
+   
+
     fantasydata(url, function (data) {
+      console.log(data);
+
       var returnValues = {
         name: data.Name,
         position: data.Position,
@@ -81,72 +86,13 @@ module.exports = {
         receivingTouchdowns: data.ReceivingTouchdowns
 
       };
-
+     
       res.json(returnValues);
+     
     });
-    
-    const team = [
-      {
-        playerId: 4314,
-        name: "",
-        position: 'QB'
-      },
-      {
-        playerId: 8355,
-        name: "",
-        position: 'WR'
-      },
-      {
-        playerId: 15150,
-        name: "",
-        position: 'RB'
-      },
-      {
-        playerId: 2593,
-        name: "",
-        position: 'QB'
-      },
-      {
-        playerId: 13227,
-        name: "",
-        position: 'WR'
-      },
-      {
-        playerId: 18995,
-        name: "",
-        position: 'RB'
-      }
-    ]
-    // const teamPlayers = []
-    // for (i = 0; i < team.length; i++) {
 
-    //   let player = {}
-    //   player.id = team[i].playerId
-    //   teamPlayers.push(player)
-    // }
+   },
 
-    const teamPlayers = team.map((player) => {
-      return {
-        id: player.playerId,
-        // name: player.name
-      }
-
-    })
-    
-    console.log(teamPlayers);
-   
-  },
-// from fantasy datat API documentation //
-    //   getPlayerGameStatsByPlayerPromise(season, week, playerid){
-    //     var parameters = {};
-    //     parameters['season']=season;
-    //     parameters['week']=week;
-    //     parameters['playerid']=playerid;
-    //     return this.GetPromise('/v3/nfl/stats/{format}/PlayerGameStatsByPlayerID/2018REG/' + req.params.week_id + "/" + req.params.id
-    // }
-
-
-    
 
   // Team API URL 
   team: function (req, res) {
@@ -173,5 +119,13 @@ module.exports = {
 
 
 }; //end module export
+
+
+
+
+
+
+
+
 
 
