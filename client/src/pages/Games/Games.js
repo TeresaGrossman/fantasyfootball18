@@ -92,8 +92,6 @@ class Games extends Component {
                 placeholder="Team (required)"
               />
               
-
-
       <Table hover>
                     <thead>
                       <tr>
@@ -103,8 +101,6 @@ class Games extends Component {
                       </tr>
                     </thead>
                     <tbody>
-
-
 
         {this.state.players.map(player => (
 
@@ -119,13 +115,10 @@ class Games extends Component {
             <td>RecYrds: {player.receivingYards}</td>
             <td>RecTD: {player.receivingTouchdowns}</td>
             </tr>
-        ))}
-
-                  
-                     
-                      
+        ))}              
                     </tbody>
                   </Table>
+                  
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
