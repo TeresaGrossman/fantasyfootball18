@@ -8,6 +8,7 @@ import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import News from "./pages/News";
+import Injuries from "./pages/Injuries";
 
 const App = () => (
   <Router>
@@ -21,6 +22,7 @@ const App = () => (
         <Route exact path="/team" component={Team} />
         <Route exact path="/games/:id" component={Detail} />
         <Route exact path="/news" component={News} />
+        <Route exact path="/injuries" component={Injuries} />
         <Route component={NoMatch} />
       </Switch>
     </div>

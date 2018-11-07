@@ -21,7 +21,7 @@ class News extends Component {
 
       render(){
           return (
-            <div>Hello World</div>
+            <div>Hello News World</div>
           );
           
       }

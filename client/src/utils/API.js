@@ -32,5 +32,8 @@ export default {
 
   getNews: function(){
     return axios.get("/api/news");
+  },
+  getInjuries: function(){
+    return axios.get("/api/injuries");
   }
 };
