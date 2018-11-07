@@ -1,4 +1,5 @@
 const db = require("../models");
+var fantasydata = require("../external/fantasydata.js");
 
 // Defining methods for the gamesController Mongoose DB //
 module.exports = {
@@ -33,6 +34,32 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+
+  news: function (req, res) {
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/News?";
+    fantasydata(url, function (data) {
+      // const news = data.data;
+      // const frontEndResponse = [];
+
+      // for (let i = 0; i < news.length; i++) {
+      //   let tempNewsObj = {};
+      //   tempNewsObj.title = news[i].Title;
+
+      //   // console.log(`Title: ${news[i].Title}`);
+      //   // console.log(`Team: ${news[i].Team}`);
+      //   // console.log(`Time Ago: ${news[i].TimeAgo}`);
+      //   // console.log(`PlayerID: ${news[i].PlayerID}`);
+
+      //   frontEndResponse.push(tempNewsObj);
+      // }
+
+      var returnValues = {
+        data: data
+      }
+
+      res.json(returnValues);
+    })
   },
 
   // Live API URL grabs general game stats
@@ -70,7 +97,7 @@ module.exports = {
     var fantasydata = require("../external/fantasydata.js");
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
 
-   
+
 
     fantasydata(url, function (data) {
       console.log(data);
@@ -86,12 +113,12 @@ module.exports = {
         receivingTouchdowns: data.ReceivingTouchdowns
 
       };
-     
+
       res.json(returnValues);
-     
+
     });
 
-   },
+  },
 
 
   // Team API URL 

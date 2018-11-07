@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const gameRoutes = require("./games");
+const newsRoutes = require("./news");
 // const weatherRoutes = require("./weather");
 
 
@@ -7,5 +8,7 @@ const gameRoutes = require("./games");
 router.use("/games", gameRoutes);
 // Weather routes
 // router.use("/weather", weatherRoutes);
+
+router.use("/news", newsRoutes);
 
 module.exports = router;

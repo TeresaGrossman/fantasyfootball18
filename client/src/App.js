@@ -7,6 +7,7 @@ import Team from "./pages/Team";
 import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
+import News from "./pages/News";
 
 const App = () => (
   <Router>
@@ -19,6 +20,7 @@ const App = () => (
         <Route exact path="/player/:week_id" component={Player} />
         <Route exact path="/team" component={Team} />
         <Route exact path="/games/:id" component={Detail} />
+        <Route exact path="/news" component={News} />
         <Route component={NoMatch} />
       </Switch>
     </div>
