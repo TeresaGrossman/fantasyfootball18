@@ -32,8 +32,10 @@ class Games extends Component {
 
   componentDidMount() {
     this.loadGames();
+    this.loadPlayer();
   }
   loadPlayer = () => {
+<<<<<<< HEAD
 
     var teamArray = [18055, 16253, 17923, 16763, 18058, 17959];
   
@@ -50,11 +52,28 @@ class Games extends Component {
         }
   
     };
+=======
+>>>>>>> 143cc898c327cac423af238dc84c9af78d22918c
 
+    var teamArray = [18055, 16253, 17923, 16763, 18058, 17959];
+  
+        for(var i = 0; i<teamArray.length; i++) {
+  
+            API.getPlayer(this.props.match.params.week_id, teamArray[i])
+            .then(res => {
+                var players = this.state.players;
+                players.push(res.data);
+                this.setState({players: players})
+            })
+            .catch(err => console.log(err));
+    
+        }
+  
+    };
   loadGames = () => {
     API.getGames()
       .then(res =>
-        this.setState({ games: res.data, user: "", team: "", players: "" })
+        this.setState({ games: res.data, user: "", team: ""})
       )
       .catch(err => console.log(err));
   };
@@ -107,53 +126,21 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-
-            <div>
-              {this.state.players.map(player => (
-              <Table bordered>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Player Name</th>
-                    <th>Position</th>
-                    <th>Team</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">4</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>{player.name}</td>
-                    <td>{player.position}</td>
-                  </tr>
-                </tbody>
-              </Table>
-              ))}
-              </div>
+               <div>
+        {this.state.players.map(player => (
+          <div>
+            <h4>PLAYER</h4>
+            <div>Name: {player.name}</div>
+            <div>Position: {player.position}</div>
+            <div>PasYrds: {player.passingYards}</div>
+            <div>PasTD: {player.passingTouchdowns}</div>
+            <div>RusYrds: {player.rushingYards}</div>
+            <div>RusTD: {player.rushingTouchdowns}</div>
+            <div>RecYrds: {player.receivingYards}</div>
+            <div>RecTD: {player.receivingTouchdowns}</div>
+          </div>
+        ))}
+      </div>
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}

@@ -4,18 +4,6 @@ import { Link } from "react-router-dom";
 
 class Games extends Component {
 
-
-  /** TUTOR SESSION PSEUDO 10/29/18
-   * find players in API and get ID 
-   * get Id from DB axios/hhtp req
-   * hit sports API
-   * search sports API for most recent plays
-   * a for each loop player ID inside recent plays
-   * if player ID involved with play, display stat player was in involved with
-   * console log everything
-   * create variable outside of for loop to save player data
-  */
-
 // livegames API to React page //
 
   state = {
