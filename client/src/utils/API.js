@@ -28,5 +28,12 @@ export default {
   // Saves a game to the database
   saveGame: function(gameData) {
     return axios.post("/api/games", gameData);
+  },
+
+  getNews: function(){
+    return axios.get("/api/news");
+  },
+  getInjuries: function(){
+    return axios.get("/api/injuries");
   }
 };
