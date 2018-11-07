@@ -69,9 +69,6 @@ module.exports = {
 
     var fantasydata = require("../external/fantasydata.js");
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
-
-   
-
     fantasydata(url, function (data) {
       console.log(data);
 
@@ -86,12 +83,12 @@ module.exports = {
         receivingTouchdowns: data.ReceivingTouchdowns
 
       };
-     
+
       res.json(returnValues);
-     
+
     });
 
-   },
+  },
 
 
   // Team API URL 

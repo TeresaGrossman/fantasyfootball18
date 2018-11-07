@@ -11,17 +11,34 @@ class Games extends Component {
     games: [],
     user: "",
     team: "",
-    players: ""
+    players: []
   };
 
   componentDidMount() {
     this.loadGames();
+    this.loadPlayer();
   }
+  loadPlayer = () => {
 
+    var teamArray = [18055, 16253, 17923, 16763, 18058, 17959];
+  
+        for(var i = 0; i<teamArray.length; i++) {
+  
+            API.getPlayer(this.props.match.params.week_id, teamArray[i])
+            .then(res => {
+                var players = this.state.players;
+                players.push(res.data);
+                this.setState({players: players})
+            })
+            .catch(err => console.log(err));
+    
+        }
+  
+    };
   loadGames = () => {
     API.getGames()
       .then(res =>
-        this.setState({ games: res.data, user: "", team: "", players: "" })
+        this.setState({ games: res.data, user: "", team: ""})
       )
       .catch(err => console.log(err));
   };
@@ -72,12 +89,21 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-              <TextArea
-                value={this.state.Players}
-                onChange={this.handleInputChange}
-                name="players"
-                placeholder="Players (required)"
-              />
+               <div>
+        {this.state.players.map(player => (
+          <div>
+            <h4>PLAYER</h4>
+            <div>Name: {player.name}</div>
+            <div>Position: {player.position}</div>
+            <div>PasYrds: {player.passingYards}</div>
+            <div>PasTD: {player.passingTouchdowns}</div>
+            <div>RusYrds: {player.rushingYards}</div>
+            <div>RusTD: {player.rushingTouchdowns}</div>
+            <div>RecYrds: {player.receivingYards}</div>
+            <div>RecTD: {player.receivingTouchdowns}</div>
+          </div>
+        ))}
+      </div>
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
