@@ -1,9 +1,16 @@
 import React from "react";
 
+const styles = {
+  navbarStyle: {
+    background: "gray",
+    justifyContent: "flex-end"
+  }
+};
+
 const Nav = () => (
-  <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav style={styles.navbarStyle} className="navbar">
     <a className="navbar-brand" href="/">
-       Player List
+       Homepage
     </a>
   </nav>
 );

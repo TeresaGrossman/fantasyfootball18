@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DeleteBtn from "../../components/DeleteBtn";
-import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
@@ -75,9 +74,8 @@ class Games extends Component {
             {/* <img src={BackgroundImage} style={styles.container} /> */}
         <Row>
           <Col size="md-6">
-            <Jumbotron>
-              <h1>Pick Your Team!</h1>
-            </Jumbotron>
+            <br></br>
+            <br></br>
             <form>
               <Input
                 value={this.state.User}
@@ -108,16 +106,13 @@ class Games extends Component {
             </form>
           </Col>
           <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>My Team</h1>
-            </Jumbotron>
             {this.state.games.length ? (
               <List>
                 {this.state.games.map(game => (
                   <ListItem key={game._id}>
                     <Link to={"/games/" + game._id}>
                       <strong>
-                        {game.team} by {game.user}
+                        {game.user}'s Team is {game.team}
                       </strong>
                     </Link>
                     <DeleteBtn onClick={() => this.deleteGame(game._id)} />
@@ -125,8 +120,8 @@ class Games extends Component {
                 ))}
               </List>
             ) : (
-              <h3>No Results to Display</h3>
-            )}
+                <h3>No Results to Display</h3>
+              )}
           </Col>
         </Row>
       </Container>
