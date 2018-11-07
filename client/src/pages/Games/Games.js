@@ -7,6 +7,7 @@ import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
 import BackgroundImage from "../../components/FF.jpg";
 // const anotherWay = require('../../components/FF.jpg');
+import { Table } from 'reactstrap';
 
 const styles = {
   container: {
@@ -26,12 +27,29 @@ class Games extends Component {
     games: [],
     user: "",
     team: "",
-    players: ""
+    players: []
   };
 
   componentDidMount() {
     this.loadGames();
   }
+  loadPlayer = () => {
+
+    var teamArray = [18055, 16253, 17923, 16763, 18058, 17959];
+  
+        for(var i = 0; i<teamArray.length; i++) {
+  
+            API.getPlayer(this.props.match.params.week_id, teamArray[i])
+            .then(res => {
+                var players = this.state.players;
+                players.push(res.data);
+                this.setState({players: players})
+            })
+            .catch(err => console.log(err));
+    
+        }
+  
+    };
 
   loadGames = () => {
     API.getGames()
@@ -89,14 +107,53 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-              <List>
-                <ListItem>QB</ListItem>
-                <ListItem>WR</ListItem>
-                <ListItem>RB</ListItem>
-                <ListItem>QB</ListItem>
-                <ListItem>WR</ListItem>
-                <ListItem>RB</ListItem>
-              </List>
+
+            <div>
+              {this.state.players.map(player => (
+              <Table bordered>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Player Name</th>
+                    <th>Position</th>
+                    <th>Team</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>{player.name}</td>
+                    <td>{player.position}</td>
+                  </tr>
+                </tbody>
+              </Table>
+              ))}
+              </div>
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
