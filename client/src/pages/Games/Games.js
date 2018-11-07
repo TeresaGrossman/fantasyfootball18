@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Table } from 'reactstrap';
+
 
 class Games extends Component {
   state = {
@@ -89,21 +91,41 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-               <div>
+              
+
+
+      <Table hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Player Name</th>
+                        <th>Player Position</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+
+
         {this.state.players.map(player => (
-          <div>
-            <h4>PLAYER</h4>
-            <div>Name: {player.name}</div>
-            <div>Position: {player.position}</div>
-            <div>PasYrds: {player.passingYards}</div>
-            <div>PasTD: {player.passingTouchdowns}</div>
-            <div>RusYrds: {player.rushingYards}</div>
-            <div>RusTD: {player.rushingTouchdowns}</div>
-            <div>RecYrds: {player.receivingYards}</div>
-            <div>RecTD: {player.receivingTouchdowns}</div>
-          </div>
+
+          <tr>
+            <th scope="row">{player.id}</th> 
+            <td>Name: {player.name}</td>
+            <td>Position: {player.position}</td>
+            <td>PasYrds: {player.passingYards}</td>
+            <td>PasTD: {player.passingTouchdowns}</td>
+            <td>RusYrds: {player.rushingYards}</td>
+            <td>RusTD: {player.rushingTouchdowns}</td>
+            <td>RecYrds: {player.receivingYards}</td>
+            <td>RecTD: {player.receivingTouchdowns}</td>
+            </tr>
         ))}
-      </div>
+
+                  
+                     
+                      
+                    </tbody>
+                  </Table>
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
