@@ -15,7 +15,7 @@ function doFantasyAPI(url, cb) {
 
         if (!error && response.statusCode === 200) cb(JSON.parse(body));
         else {
-            console.log("error: " + err);
+            console.log("error: " + error);
             cb({});
         };
         
