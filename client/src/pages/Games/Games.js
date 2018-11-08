@@ -13,7 +13,8 @@ class Games extends Component {
     games: [],
     user: "",
     team: "",
-    players: []
+    players: [],
+    selectionTable: {}
   };
 
   componentDidMount() {
@@ -31,6 +32,7 @@ class Games extends Component {
                 var players = this.state.players;
                 players.push(res.data);
                 this.setState({players: players})
+                console.log(this.state.players)
             })
             .catch(err => console.log(err));
     
@@ -103,8 +105,7 @@ class Games extends Component {
                     <tbody>
 
         {this.state.players.map(player => (
-
-          <tr>
+          <tr key={player.id}>
             <th scope="row">{player.id}</th> 
             <td>Name: {player.name}</td>
             <td>Position: {player.position}</td>

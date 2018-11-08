@@ -7,15 +7,18 @@ function doFantasyAPI(url, cb) {
         url: url,
         method: 'GET',
         headers: {
-            'Ocp-Apim-Subscription-Key': '7acd3937197e4eb48f178057d8efbd2b'
+            'Ocp-Apim-Subscription-Key': '8e2069e6dccf47a28fd0f70ba78ffaeb'
         }
     };
 
     request(options, function(error, response, body) {
 
-        if (!error && response.statusCode === 200) cb(JSON.parse(body));
+        if (!error && response.statusCode === 200) {
+            cb(JSON.parse(body));
+        } 
         else {
-            console.log("error: " + err);
+            console.log("error: " + error);
+            console.log(response.statusCode)
             cb({});
         };
         
