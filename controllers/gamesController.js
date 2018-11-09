@@ -62,6 +62,32 @@ module.exports = {
     })
   },
 
+  ticker: function (req, res) {
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/News?";
+    fantasydata(url, function (data) {
+      // const news = data.data;
+      // const frontEndResponse = [];
+
+      // for (let i = 0; i < news.length; i++) {
+      //   let tempNewsObj = {};
+      //   tempNewsObj.title = news[i].Title;
+
+      //   // console.log(`Title: ${news[i].Title}`);
+      //   // console.log(`Team: ${news[i].Team}`);
+      //   // console.log(`Time Ago: ${news[i].TimeAgo}`);
+      //   // console.log(`PlayerID: ${news[i].PlayerID}`);
+
+      //   frontEndResponse.push(tempNewsObj);
+      // }
+
+      var returnValues = {
+        data: data
+      }
+
+      res.json(returnValues);
+    })
+  },
+  
   injuries: function (req, res) {
     const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/9?";
     fantasydata(url, function (data) {
