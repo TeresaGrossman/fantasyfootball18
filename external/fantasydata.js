@@ -18,7 +18,6 @@ function doFantasyAPI(url, cb) {
         } 
         else {
             console.log("error: " + error);
-            console.log(response.statusCode)
             cb({});
         };
         
