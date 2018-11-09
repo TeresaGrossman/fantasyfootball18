@@ -150,7 +150,6 @@ module.exports = {
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
 
     fantasydata(url, function (data) {
-      console.log(data);
 
       var returnValues = {
         name: data.Name,
@@ -175,7 +174,7 @@ module.exports = {
   team: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/9/TEN";
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/10/PIT";
     // + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {

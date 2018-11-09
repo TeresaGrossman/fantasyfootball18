@@ -16,7 +16,7 @@ import { Button } from 'reactstrap';
 const App = () => (
   <Router>
     <div>
-      <Button className = "btn">Hi</Button>
+      {/* <Button className = "btn">Hi</Button> */}
       <Nav />
       <Switch>
         <Route exact path="/" component={Games} />
