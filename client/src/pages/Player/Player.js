@@ -24,7 +24,7 @@ class Player extends Component {
 
   loadPlayer = () => {
 
-  var teamArray = [18055, 16253, 17923, 16763, 18058, 17959];
+    var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
 
       for(var i = 0; i<teamArray.length; i++) {
 
