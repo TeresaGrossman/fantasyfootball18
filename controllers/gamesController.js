@@ -62,6 +62,32 @@ module.exports = {
     })
   },
 
+  ticker: function (req, res) {
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/News?";
+    fantasydata(url, function (data) {
+      // const news = data.data;
+      // const frontEndResponse = [];
+
+      // for (let i = 0; i < news.length; i++) {
+      //   let tempNewsObj = {};
+      //   tempNewsObj.title = news[i].Title;
+
+      //   // console.log(`Title: ${news[i].Title}`);
+      //   // console.log(`Team: ${news[i].Team}`);
+      //   // console.log(`Time Ago: ${news[i].TimeAgo}`);
+      //   // console.log(`PlayerID: ${news[i].PlayerID}`);
+
+      //   frontEndResponse.push(tempNewsObj);
+      // }
+
+      var returnValues = {
+        data: data
+      }
+
+      res.json(returnValues);
+    })
+  },
+  
   injuries: function (req, res) {
     const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/9?";
     fantasydata(url, function (data) {
@@ -124,7 +150,6 @@ module.exports = {
     var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByPlayerID/2018REG/" + req.params.week_id + "/" + req.params.id;
 
     fantasydata(url, function (data) {
-      console.log(data);
 
       var returnValues = {
         name: data.Name,
@@ -149,7 +174,7 @@ module.exports = {
   team: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/9/TEN";
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/10/PIT";
     // + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {
