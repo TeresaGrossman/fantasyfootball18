@@ -21,6 +21,7 @@ class Games extends Component {
   componentDidMount() {
     this.loadGames();
     this.loadPlayer();
+    setInterval(this.loadPlayer, 60000);
 
   }
   // Convert stats to points //
@@ -65,6 +66,7 @@ class Games extends Component {
   }
   // loads specific players from API //
   loadPlayer = () => {
+    console.log("loaded");
     var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
     var players = this.state.players;
 

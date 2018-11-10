@@ -22,9 +22,6 @@ const Nav = () => (
     <a className="navbar-brand" style={styles.navbarStyle} href="/news">
       News
     </a>
-    <a className="navbar-brand" style={styles.navbarStyle} href="/articles">
-      Articles
-    </a>
   </nav>
 );
 
