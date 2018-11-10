@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 var request = require("request");
 
 function doFantasyAPI(url, cb) {
@@ -7,7 +8,7 @@ function doFantasyAPI(url, cb) {
         url: url,
         method: 'GET',
         headers: {
-            'Ocp-Apim-Subscription-Key': ''
+            'Ocp-Apim-Subscription-Key': process.env.key
         }
     };
 
