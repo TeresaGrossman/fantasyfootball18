@@ -26,6 +26,8 @@
     "express": "^4.16.4",
     "if-env": "^1.0.4",
     "mongoose": "^5.0.17",
+    "peer": "^0.2.10",
+    "react-text-marquee": "^1.0.1",
     "reactstrap": "^6.5.0",
     "request": "^2.88.0"
   }
