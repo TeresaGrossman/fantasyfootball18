@@ -55,11 +55,6 @@ class Games extends Component {
     var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
     var players = this.state.players;
 
-<<<<<<< HEAD
-    var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
-  
-        for(var i = 0; i<teamArray.length; i++) {
-=======
     for (var i = 0; i < teamArray.length; i++) {
 
       API.getPlayer(this.props.match.params.week_id, teamArray[i])
@@ -90,7 +85,6 @@ class Games extends Component {
   -----
   10 receiving yards= 1pt
   Receiving TD = 6pts  
->>>>>>> 3e5c142b5a66d27fe4415eeeeab4274a5c94a0b7
   
   page is refreshed every two minutes ( 120000 ) to update the game
   */
