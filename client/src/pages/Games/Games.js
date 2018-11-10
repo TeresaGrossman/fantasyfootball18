@@ -152,35 +152,6 @@ class Games extends Component {
                 name="team"
                 placeholder="Team (required)"
               />
-<<<<<<< HEAD
-              
-      <Table hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Player Name</th>
-                        <th>Player Position</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-        {this.state.players.map(player => (
-
-          <tr>
-            <th scope="row">{player.id}</th> 
-            <td>Name: {player.name}</td>
-            <td>Position: {player.position}</td>
-            <td>PasYrds: {player.passingYards}</td>
-            <td>PasTD: {player.passingTouchdowns}</td>
-            <td>RusYrds: {player.rushingYards}</td>
-            <td>RusTD: {player.rushingTouchdowns}</td>
-            <td>RecYrds: {player.receivingYards}</td>
-            <td>RecTD: {player.receivingTouchdowns}</td>
-            </tr>
-        ))}              
-                    </tbody>
-                  </Table>
-=======
 
               <Table bordered>
                 <thead>
@@ -215,7 +186,6 @@ class Games extends Component {
                   ))}
                 </tbody>
               </Table>
->>>>>>> 3e5c142b5a66d27fe4415eeeeab4274a5c94a0b7
 
               <FormBtn
                 disabled={!(this.state.team && this.state.user)}
