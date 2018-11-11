@@ -1,14 +1,12 @@
-require("dotenv").config();
-
 var request = require("request");
 
 function doFantasyAPI(url, cb) {
-console.log(process.env.ACCESS_KEY);
+console.log(process.env.key);
     const options = {  
         url: url,
         method: 'GET',
         headers: {
-            'Ocp-Apim-Subscription-Key': 'cf65fe71442940abaf90a006c17fe2cf'
+            'Ocp-Apim-Subscription-Key': process.env.key
         }
     };
 
@@ -27,5 +25,4 @@ console.log(process.env.ACCESS_KEY);
 }
 
 module.exports = doFantasyAPI;
-
 

@@ -24,20 +24,7 @@ class Games extends Component {
     setInterval(this.loadPlayer, 60000);
 
   }
-  // Convert stats to points //
-  /*
-    25 pass yards= 1pt
-    pass TD= 4pts
-    -----
-     10 rush yards = 1pt
-    Rush TD = 6pts
-    -----
-    10 receiving yards= 1pt
-    Receiving TD = 6pts  
-    
-    page is refreshed every two minutes ( 120000 ) to update the game
-    */
-
+  
   pointConversion = (player) => {
     var points = 0
     if (player.passingYards >= 25) {
@@ -68,7 +55,7 @@ class Games extends Component {
   loadPlayer = () => {
     console.log("loaded");
     var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
-    var players = this.state.players;
+    var players = [];
 
     for (var i = 0; i < teamArray.length; i++) {
 
@@ -156,7 +143,9 @@ class Games extends Component {
                 </thead>
                 <tbody>
 
-                  {this.state.players.map(player => (
+                  {this.state.players.sort(function(a,b){
+                    return a["name"].localeCompare(b["name"]); 
+                    }).map(player => (
                     <tr key={player.id}>
                       <th scope="row">{player.id}</th>
                       <td> {player.name}</td>
