@@ -21,39 +21,41 @@ class Games extends Component {
   componentDidMount() {
     this.loadGames();
     this.loadPlayer();
-    
-  }
+    setInterval(this.loadPlayer, 60000);
 
+  }
+  
   pointConversion = (player) => {
     var points = 0
-      if (player.passingYards >= 25) {
-        points += Math.floor(player.passingYards / 25);
-      }
-      if (player.passingTouchdowns >= 1) {
-        points += Math.floor(player.passingTouchdowns / 1);
+    if (player.passingYards >= 25) {
+      points += Math.floor(player.passingYards / 25);
+    }
+    if (player.passingTouchdowns >= 1) {
+      points += Math.floor(player.passingTouchdowns / 1);
 
-      }
-      if (player.rushingYards >= 10) {
-        points += Math.floor(player.rushingYards / 10);
- 
-      }
-      if (player.rushingTouchdowns >= 1) {
-        points += Math.floor(player.rushingTouchdowns / 1);
+    }
+    if (player.rushingYards >= 10) {
+      points += Math.floor(player.rushingYards / 10);
 
-      }
-      if (player.receivingYards >= 10) {
-        points += Math.floor(player.receivingYards / 10);
+    }
+    if (player.rushingTouchdowns >= 1) {
+      points += Math.floor(player.rushingTouchdowns / 1);
 
-      }
-      if (player.receivingTouchdowns >= 1) {
-        points += Math.floor(player.receivingTouchdowns / 1);
-      }
-      return points;
+    }
+    if (player.receivingYards >= 10) {
+      points += Math.floor(player.receivingYards / 10);
+
+    }
+    if (player.receivingTouchdowns >= 1) {
+      points += Math.floor(player.receivingTouchdowns / 1);
+    }
+    return points;
   }
-
+  // loads specific players from API //
   loadPlayer = () => {
+    console.log("loaded");
     var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
-    var players = this.state.players;
+    var players = [];
 
     for (var i = 0; i < teamArray.length; i++) {
 
@@ -67,29 +69,6 @@ class Games extends Component {
         .catch(err => console.log(err));
     }
   };
-
-
-  /*
-  function to convert pass/rec/rush yards and TD's to points
-  function has for loop which goes through player data
-  yards and tds... determines how many yards and td's were made
-  comares this to what was set (yards and td's equal x amount of points)
-  each row is added up to equal total points
-  total points end up in each player's row's points box
-
-  25 pass yards= 1pt
-  pass TD= 4pts
-  -----
-   10 rush yards = 1pt
-  Rush TD = 6pts
-  -----
-  10 receiving yards= 1pt
-  Receiving TD = 6pts  
-  
-  page is refreshed every two minutes ( 120000 ) to update the game
-  */
-  
-
 
   loadGames = () => {
     API.getGames()
@@ -134,13 +113,13 @@ class Games extends Component {
             <br></br>
             <br></br>
             <form>
-              <Input
+              <Input 
                 value={this.state.User}
                 onChange={this.handleInputChange}
                 name="user"
                 placeholder="User (required)"
               />
-              <Input
+              <Input 
                 value={this.state.Team}
                 onChange={this.handleInputChange}
                 name="team"
@@ -164,7 +143,9 @@ class Games extends Component {
                 </thead>
                 <tbody>
 
-                  {this.state.players.map(player => (
+                  {this.state.players.sort(function(a,b){
+                    return a["name"].localeCompare(b["name"]); 
+                    }).map(player => (
                     <tr key={player.id}>
                       <th scope="row">{player.id}</th>
                       <td> {player.name}</td>
@@ -181,12 +162,12 @@ class Games extends Component {
                 </tbody>
               </Table>
 
-              <FormBtn
+              {/* <FormBtn
                 disabled={!(this.state.team && this.state.user)}
                 onClick={this.handleFormSubmit}
               >
                 Submit Team
-              </FormBtn> 
+              </FormBtn>  */}
             </form>
           </Col>
           <Col size="md-6 sm-12">

@@ -26,4 +26,3 @@ console.log(process.env.key);
 
 module.exports = doFantasyAPI;
 
-

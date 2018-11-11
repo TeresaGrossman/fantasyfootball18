@@ -11,20 +11,21 @@ import News from "./pages/News";
 import Injuries from "./pages/Injuries";
 import Ticker from "./components/Ticker/Ticker.js";
 
-import { Button } from 'reactstrap';
+// import { Button } from 'reactstrap';
 
 const App = () => (
   <Router>
     <div>
+      
       {/* <Button className = "btn">Hi</Button> */}
       <Nav />
       <Switch>
-        <Route exact path="/" component={Games} />
+        <Route exact path="/" component={Detail} />
         <Route exact path="/games/:week_id" component={Games} />
         <Route exact path="/livegames/:week_id/:id" component={LiveGames} />
         <Route exact path="/player/:week_id" component={Player} />
         <Route exact path="/team" component={Team} />
-        <Route exact path="/games/:id" component={Detail} />
+        {/* <Route exact path="/games/:id" component={Detail} /> */}
         <Route exact path="/news" component={News} />
         <Route exact path="/injuries" component={Injuries} />
         <Route exact path="/ticker" component={Ticker} />

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import API from "../../utils/API";
-import { Table } from 'reactstrap';
+
 
 
 class Detail extends Component {
@@ -27,43 +27,12 @@ class Detail extends Component {
         </Row>
         <Row>
           <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Players</h1>
-              <p>
-                {this.state.game.players}
-              </p>
-            </article>
-            <Table hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>Player Name</th>
-                        <th>Player Position</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-
-        {this.state.players.map(player => (
-
-          <tr>
-            <th scope="row">{player.id}</th> 
-            <td>Name: {player.name}</td>
-            <td>Position: {player.position}</td>
-            <td>PasYrds: {player.passingYards}</td>
-            <td>PasTD: {player.passingTouchdowns}</td>
-            <td>RusYrds: {player.rushingYards}</td>
-            <td>RusTD: {player.rushingTouchdowns}</td>
-            <td>RecYrds: {player.receivingYards}</td>
-            <td>RecTD: {player.receivingTouchdowns}</td>
-            </tr>
-        ))}              
-                    </tbody>
-                  </Table>
+          
           </Col>
         </Row>
         <Row>
           <Col size="md-2">
-            <Link to="/">← Back to Games</Link>
+            <Link to="/"></Link>
           </Col>
         </Row>
       </Container>
