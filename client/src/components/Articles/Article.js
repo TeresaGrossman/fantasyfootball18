@@ -6,13 +6,14 @@ import { Card, CardImg, CardText, CardBody,
 export const Article = ( props ) => {
   return (
    <div>
-<Card>
-<CardText>
-    {props.content}
-</CardText>
-
-</Card>
-
+      <Card>
+          <CardText style={{
+              fontWeight: "bold",
+              backgroundColor: "#777",
+            }}>
+            {props.content}
+          </CardText>
+      </Card>
     </div>
   );
 };
