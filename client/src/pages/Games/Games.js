@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-import { Input, } from "../../components/Form";
+// import { Input, } from "../../components/Form";
 import { Table } from 'reactstrap';
+import { Input, Col } from 'reactstrap';
 // import "../styles/Games.css";
 
 
@@ -14,13 +15,19 @@ const Background = '../images/ff.png';
 const styles = {
   mainBg: {
     backgroundImage: `url(${Background})`,
-    backgroundSize: 'cover',
-    justifyContent: "flex-end"
+    align: "center"
+    // backgroundSize: 'cover',
+    // justifyContent: "flex-end"
   },
   tableStyles: {
     color: "yellow"
+
+  },
+  inputStyles: {
+    background: "black",
+    color: "yellow"
   }
-  
+
 }; // END STYLES 
 
 
@@ -128,60 +135,65 @@ class Games extends Component {
       <div style={styles.mainBg}>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
-
         <div >
-          <Input
-            value={this.state.User}
-            onChange={this.handleInputChange}
-            name="user"
-            placeholder="User (required)"
-          />
-          <Input
-            value={this.state.Team}
-            onChange={this.handleInputChange}
-            name="team"
-            placeholder="Team (required)"
-          />
+          <Col sm={4}>
+            <Input size="sm" style={styles.inputStyles}
+              value={this.state.User}
+              onChange={this.handleInputChange}
+              name="user"
+              placeholder="User (required)"
+            />
+            <br></br>
+            <Input size="sm" style={styles.inputStyles}
+              value={this.state.Team}
+              onChange={this.handleInputChange}
+              name="team"
+              placeholder="Team (required)"
+            />
+          </Col>
         </div>
+        <br></br>
+        <br></br>
         <div>
-          <Table bordered style={styles.tableStyles}>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Player Name</th>
-                <th>Player Position</th>
-                <th>Pass Yards</th>
-                <th>Pass Touchdowns</th>
-                <th>Rush Yards</th>
-                <th>Rush Touchdowns</th>
-                <th>Receiving Yards</th>
-                <th>Receiving Touchdowns</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              {this.state.players.sort(function (a, b) {
-                return a["name"].localeCompare(b["name"]);
-              }).map(player => (
-                <tr key={player.id}>
-                  <th scope="row">{player.id}</th>
-                  <td> {player.name}</td>
-                  <td> {player.position}</td>
-                  <td> {player.passingYards}</td>
-                  <td> {player.passingTouchdowns}</td>
-                  <td> {player.rushingYards}</td>
-                  <td> {player.rushingTouchdowns}</td>
-                  <td> {player.receivingYards}</td>
-                  <td> {player.receivingTouchdowns}</td>
-                  <td> {player.points}</td>
+          <Col md={8}>
+            <Table bordered style={styles.tableStyles}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Player Name</th>
+                  <th>Player Position</th>
+                  <th>Pass Yards</th>
+                  <th>Pass Touchdowns</th>
+                  <th>Rush Yards</th>
+                  <th>Rush Touchdowns</th>
+                  <th>Receiving Yards</th>
+                  <th>Receiving Touchdowns</th>
+                  <th>Points</th>
                 </tr>
+              </thead>
+              <tbody>
 
-              ))}
-            </tbody>
-          </Table>
+                {this.state.players.sort(function (a, b) {
+                  return a["name"].localeCompare(b["name"]);
+                }).map(player => (
+                  <tr key={player.id}>
+                    <th scope="row">{player.id}</th>
+                    <td> {player.name}</td>
+                    <td> {player.position}</td>
+                    <td> {player.passingYards}</td>
+                    <td> {player.passingTouchdowns}</td>
+                    <td> {player.rushingYards}</td>
+                    <td> {player.rushingTouchdowns}</td>
+                    <td> {player.receivingYards}</td>
+                    <td> {player.receivingTouchdowns}</td>
+                    <td> {player.points}</td>
+                  </tr>
+
+                ))}
+              </tbody>
+            </Table>
+          </Col>
+          <br></br>
           <br></br>
           <br></br>
           <br></br>
