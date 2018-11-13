@@ -10,7 +10,7 @@ const API = {
           })
             .then(function(data) {
            
-                // console.log(data);
+              
                 
           });
     }

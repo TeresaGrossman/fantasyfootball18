@@ -25,7 +25,7 @@ const App = () => (
         <Route exact path="/livegames/:week_id/:id" component={LiveGames} />
         <Route exact path="/player/:week_id" component={Player} />
         <Route exact path="/team" component={Team} />
-        {/* <Route exact path="/games/:id" component={Detail} /> */}
+        {/* <Route exact path="/games/:week_id" component={Detail} /> */}
         <Route exact path="/news" component={News} />
         <Route exact path="/injuries" component={Injuries} />
         <Route exact path="/ticker" component={Ticker} />
