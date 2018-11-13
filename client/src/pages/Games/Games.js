@@ -15,6 +15,8 @@ const Background = '../images/ff.png';
 const styles = {
   mainBg: {
     backgroundImage: `url(${Background})`,
+    width: "100%",
+    height: "2000px",
     align: "center"
     // backgroundSize: 'cover',
     // justifyContent: "flex-end"
