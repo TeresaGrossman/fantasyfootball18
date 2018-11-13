@@ -14,13 +14,15 @@ const Background = '../images/ff.png';
 const styles = {
   mainBg: {
     backgroundImage: `url(${Background})`,
-    backgroundSize: 'cover'
-
-
-
-
+    backgroundSize: 'cover',
+    justifyContent: "flex-end"
+  },
+  tableStyles: {
+    color: "yellow"
   }
+  
 }; // END STYLES 
+
 
 
 class Games extends Component {
@@ -144,7 +146,7 @@ class Games extends Component {
           />
         </div>
         <div>
-          <Table bordered>
+          <Table bordered style={styles.tableStyles}>
             <thead>
               <tr>
                 <th>#</th>
