@@ -87,7 +87,7 @@ module.exports = {
       res.json(returnValues);
     })
   },
-  
+
   injuries: function (req, res) {
     const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/9?";
     fantasydata(url, function (data) {
@@ -141,8 +141,6 @@ module.exports = {
 
   },
 
-
-
   // Player API URL with loop to grab 6 players
   player: function (req, res) {
 
@@ -169,7 +167,6 @@ module.exports = {
 
   },
 
-
   // Team API URL 
   team: function (req, res) {
 
@@ -192,7 +189,6 @@ module.exports = {
       res.json(returnValues);
     });
   }
-
 
 }; //end module export
 

@@ -1,11 +1,13 @@
 import React from "react";
+// import { url } from "inspector";
 
 const styles = {
   navbarStyle: {
     background: "gray",
     justifyContent: "flex-end",
    color: "white"
-  }
+  },
+ 
 };
 
 const Nav = () => (
