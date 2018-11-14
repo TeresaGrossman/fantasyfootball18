@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-// import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Table } from 'reactstrap';
 import { Input, Col } from 'reactstrap';
+// import DeleteBtn from "../../components/DeleteBtn";
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
