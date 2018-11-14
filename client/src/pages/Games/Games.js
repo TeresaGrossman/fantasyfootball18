@@ -1,11 +1,41 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
 import { Table } from 'reactstrap';
+import { Input, Col } from 'reactstrap';
+// import DeleteBtn from "../../components/DeleteBtn";
+// import { Col, Row, Container } from "../../components/Grid";
+// import { List, ListItem } from "../../components/List";
+// import { Input, TextArea, FormBtn } from "../../components/Form";
+// import { Input, } from "../../components/Form";
+// import "../styles/Games.css";
+
+
+const Background = '../images/ff.png';
+const styles = {
+  mainBg: {
+    backgroundImage: `url(${Background})`,
+    width: "100%",
+    height: "2000px",
+  },
+  tableStyles: {
+    color: "yellow",
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+  inputStyles: {
+    background: "black",
+    color: "yellow"
+  },
+  introStyles: {
+    color: "white",
+    position: "absolute",
+    left: '135vh',
+    top: '20vh',
+  
+   }
+
+}; // END STYLES 
+
 
 
 class Games extends Component {
@@ -15,16 +45,24 @@ class Games extends Component {
     team: "",
     players: [],
     selectionTable: {},
-    points: 0
+    points: 0,
+    livedata: {}
   };
 
   componentDidMount() {
     this.loadGames();
     this.loadPlayer();
-    setInterval(this.loadPlayer, 60000);
+    this.loadLiveGames();
+    // setInterval(this.loadPlayer, 60000);
 
   }
-  
+
+  loadLiveGames = () => {
+    API.getLiveGames('10', 'PIT')
+    .then(res => this.setState({livedata: res.data}))
+    .catch(err => console.log(err));
+  }
+
   pointConversion = (player) => {
     var points = 0
     if (player.passingYards >= 25) {
@@ -107,91 +145,90 @@ class Games extends Component {
 
   render() {
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-6">
+      <div>
+        <div >
+          <br></br>
+          <Col sm={4}>
+            <Input size="sm" style={styles.inputStyles}
+              value={this.state.User}
+              onChange={this.handleInputChange}
+              name="user"
+              placeholder="User (required)"
+            />
             <br></br>
-            <br></br>
-            <form>
-              <Input 
-                value={this.state.User}
-                onChange={this.handleInputChange}
-                name="user"
-                placeholder="User (required)"
-              />
-              <Input 
-                value={this.state.Team}
-                onChange={this.handleInputChange}
-                name="team"
-                placeholder="Team (required)"
-              />
-
-              <Table bordered>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Player Name</th>
-                    <th>Player Position</th>
-                    <th>Pass Yards</th>
-                    <th>Pass Touchdowns</th>
-                    <th>Rush Yards</th>
-                    <th>Rush Touchdowns</th>
-                    <th>Receiving Yards</th>
-                    <th>Receiving Touchdowns</th>
-                    <th>Points</th>
+            <Input size="sm" style={styles.inputStyles}
+              value={this.state.Team}
+              onChange={this.handleInputChange}
+              name="team"
+              placeholder="Team (required)"
+            />
+          </Col>
+        </div>
+        <br></br>
+        <div>
+          <Col md={8}>
+            <Table bordered style={styles.tableStyles}>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Player Name</th>
+                  <th>Player Position</th>
+                  <th>Pass Yards</th>
+                  <th>Pass Touchdowns</th>
+                  <th>Rush Yards</th>
+                  <th>Rush Touchdowns</th>
+                  <th>Receiving Yards</th>
+                  <th>Receiving Touchdowns</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.players.sort(function (a, b) {
+                  return a["name"].localeCompare(b["name"]);
+                }).map(player => (
+                  <tr key={player.id}>
+                    <th scope="row">{player.id}</th>
+                    <td> {player.name}</td>
+                    <td> {player.position}</td>
+                    <td> {player.passingYards}</td>
+                    <td> {player.passingTouchdowns}</td>
+                    <td> {player.rushingYards}</td>
+                    <td> {player.rushingTouchdowns}</td>
+                    <td> {player.receivingYards}</td>
+                    <td> {player.receivingTouchdowns}</td>
+                    <td> {player.points}</td>
                   </tr>
-                </thead>
-                <tbody>
-
-                  {this.state.players.sort(function(a,b){
-                    return a["name"].localeCompare(b["name"]); 
-                    }).map(player => (
-                    <tr key={player.id}>
-                      <th scope="row">{player.id}</th>
-                      <td> {player.name}</td>
-                      <td> {player.position}</td>
-                      <td> {player.passingYards}</td>
-                      <td> {player.passingTouchdowns}</td>
-                      <td> {player.rushingYards}</td>
-                      <td> {player.rushingTouchdowns}</td>
-                      <td> {player.receivingYards}</td>
-                      <td> {player.receivingTouchdowns}</td>
-                      <td> {player.points}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
-
-              {/* <FormBtn
-                disabled={!(this.state.team && this.state.user)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Team
-              </FormBtn>  */}
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            {this.state.games.length ? (
-              <List>
-                {this.state.games.map(game => (
-                  <ListItem key={game._id}>
-                    <Link to={"/games/" + game._id}>
-                      <strong>
-                        {game.user}'s Team is {game.team}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteGame(game._id)} />
-                  </ListItem>
                 ))}
-              </List>
-            ) : (
-                <h3></h3>
-              )}
+              </tbody>
+            </Table>
           </Col>
-        </Row>
-      </Container>
+        </div>
+
+
+    <div style={styles.introStyles}>
+            <br></br>
+            <br></br>
+            <h4> SCORE </h4>
+            <div>Home: {this.state.livedata.awayScore}</div>
+            <div>Away: {this.state.livedata.homeScore}</div>
+            <br></br>
+            <h4> GAME STATS </h4>
+            <div>forecast: {this.state.livedata.forecastDescription}</div>
+            <div>Low: {this.state.livedata.forecastTempLow}</div>
+            <div>High: {this.state.livedata.forecastTempHigh}</div>
+            <div>Wind Chill: {this.state.livedata.forecastWindChill}</div>
+            <div>Wind Speed: {this.state.livedata.forecastWindSpeed}</div>
+            <div>Time Left: {this.state.livedata.timeRemaining}</div>
+            <div>Quarter: {this.state.livedata.quarter}</div>
+            <div>Down: {this.state.livedata.down}</div>
+            <div>Yard Line: {this.state.livedata.yardLine}</div>
+            <div>Updated: {this.state.livedata.astUpdated}</div>
+            
+          </div>
+
+      </div>
     );
   }
 }
-
 export default Games;
+

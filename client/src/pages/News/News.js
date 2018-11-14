@@ -28,8 +28,13 @@ class News extends Component {
           return (
             //this is where we put the children
             <div>
+                <br></br>
             {this.state.news.map( article => {
-                return (<Article key={article.NewsID} title={article.Title} content={article.Content} ></Article>)
+                return (<Article 
+                    key={article.NewsID} 
+                    title={article.Title} 
+                    content={article.Content} 
+                ></Article>)
             })}
             
             </div>
