@@ -3,10 +3,10 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Table } from 'reactstrap';
 import { Input, Col } from 'reactstrap';
+import {  TextArea, FormBtn } from "../../components/Form";
 // import DeleteBtn from "../../components/DeleteBtn";
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
-import {  TextArea, FormBtn } from "../../components/Form";
 // import { Input, } from "../../components/Form";
 // import "../styles/Games.css";
 
@@ -58,7 +58,10 @@ class Games extends Component {
   }
 
   loadLiveGames = () => {
-    API.getLiveGames('10', 'PIT')
+    
+    if(this.state.user == "" || this.state.team == "") return;
+
+    API.getLiveGames('11', 'SEA')
       .then(res => this.setState({ livedata: res.data }))
       .catch(err => console.log(err));
   }
@@ -91,8 +94,11 @@ class Games extends Component {
   }
   // loads specific players from API //
   loadPlayer = () => {
+    
+    if(this.state.user == "" || this.state.team == "") return;
+
     console.log("loaded");
-    var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
+    var teamArray = [2593, 16470, 19045, 14536, 16830, 19119];
     var players = [];
 
     for (var i = 0; i < teamArray.length; i++) {
@@ -109,9 +115,10 @@ class Games extends Component {
   };
 
   loadGames = () => {
+    alert("what?????");
     API.getGames()
       .then(res => {
-        this.setState({ games: res.data, user: "", team: "" })
+        this.setState({ games: res.data })
 
       })
       .catch(err => console.log(err));
@@ -138,12 +145,26 @@ class Games extends Component {
         team: this.state.team,
         players: this.state.players
       })
-        .then(res => this.loadGames())
+        .then(res => {
+          
+          this.setState({ 
+            user: res.user,
+            team: res.team
+          });
+
+          this.loadPlayer();
+          this.loadLiveGames();
+          
+        })
         .catch(err => console.log(err));
     }
   };
 
   render() {
+    
+    var counter = 0;
+    var scoreTotal = 0;
+
     return (
       <div>
         <div >
@@ -188,27 +209,35 @@ class Games extends Component {
               <tbody>
                 {this.state.players.sort(function (a, b) {
                   return a["name"].localeCompare(b["name"]);
-                }).map(player => (
-                  <tr key={player.id}>
-                    <th scope="row">{player.id}</th>
-                    <td> {player.name}</td>
-                    <td> {player.position}</td>
-                    <td> {player.passingYards}</td>
-                    <td> {player.passingTouchdowns}</td>
-                    <td> {player.rushingYards}</td>
-                    <td> {player.rushingTouchdowns}</td>
-                    <td> {player.receivingYards}</td>
-                    <td> {player.receivingTouchdowns}</td>
-                    <td> {player.points}</td>
-                  </tr>
-                ))}
+                }).map(player => {
+                  
+                  scoreTotal = scoreTotal + player.points;
+                  counter++;
+
+                  return (
+                      <tr key={player.id}>
+                        <th scope="row"> {counter} {player.id} </th>
+                        <td> {player.name}</td>
+                        <td> {player.position}</td>
+                        <td> {player.passingYards}</td>
+                        <td> {player.passingTouchdowns}</td>
+                        <td> {player.rushingYards}</td>
+                        <td> {player.rushingTouchdowns}</td>
+                        <td> {player.receivingYards}</td>
+                        <td> {player.receivingTouchdowns}</td>
+                        <td> {player.points}</td>
+                      </tr>
+                  );
+                  
+                  })}
+                  {scoreTotal > 0 ? <tr><td colspan="10" align="right">{scoreTotal} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td></tr> : ''}
               </tbody>
             </Table>
             <FormBtn
                 disabled={!(this.state.user && this.state.team)}
                 onClick={this.handleFormSubmit}
               >
-                Create Team
+                 Team
               </FormBtn>
       </form>
           </Col>
