@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import {Article} from "../../components/Articles/Article"
+
+const styles = {
+    introStyles: {
+      color: "white"
+    }
+  };
+
 class News extends Component {
     state = {
         news: [],
@@ -24,10 +31,13 @@ class News extends Component {
           .catch(err => console.log(err));
       };
 
+
       render(){
           return (
             //this is where we put the children
             <div>
+                <br></br>
+                <div style={styles.introStyles}><h3 align="center">NFL NEWS</h3></div>
                 <br></br>
             {this.state.news.map( article => {
                 return (<Article 
