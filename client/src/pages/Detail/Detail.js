@@ -38,7 +38,10 @@ class Detail extends Component {
 </div>
 <Row>
   <Col size="md-12">
-  <img src='../../images/logo3.png' height='115px' style={{ float: 'right' }} />
+  <div>
+  <img src='../../images/logo3.png' height='115px' style={{ float: 'right' }} 
+   />
+   </div>
   </Col>
 </Row>
         <Row>
