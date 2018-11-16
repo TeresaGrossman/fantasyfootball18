@@ -53,12 +53,12 @@ class Games extends Component {
     this.loadGames();
     this.loadPlayer();
     this.loadLiveGames();
-    // setInterval(this.loadPlayer, 60000);
+    setInterval(this.loadPlayer, 60000);
 
   }
 
   loadLiveGames = () => {
-    API.getLiveGames('10', 'PIT')
+    API.getLiveGames('11', 'SEA')
     .then(res => this.setState({livedata: res.data}))
     .catch(err => console.log(err));
   }
@@ -92,7 +92,7 @@ class Games extends Component {
   // loads specific players from API //
   loadPlayer = () => {
     console.log("loaded");
-    var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
+    var teamArray = [2593, 16470, 19045, 14536, 16830, 19119];
     var players = [];
 
     for (var i = 0; i < teamArray.length; i++) {
