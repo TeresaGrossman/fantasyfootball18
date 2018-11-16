@@ -3,10 +3,10 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Table } from 'reactstrap';
 import { Input, Col } from 'reactstrap';
+import {  TextArea, FormBtn } from "../../components/Form";
 // import DeleteBtn from "../../components/DeleteBtn";
 // import { Col, Row, Container } from "../../components/Grid";
 // import { List, ListItem } from "../../components/List";
-// import { Input, TextArea, FormBtn } from "../../components/Form";
 // import { Input, } from "../../components/Form";
 // import "../styles/Games.css";
 
@@ -31,8 +31,8 @@ const styles = {
     position: "absolute",
     left: '135vh',
     top: '20vh',
-  
-   }
+
+  }
 
 }; // END STYLES 
 
@@ -54,13 +54,17 @@ class Games extends Component {
     this.loadPlayer();
     this.loadLiveGames();
     // setInterval(this.loadPlayer, 60000);
+    // setInterval(this.loadLiveGames, 60000);
 
   }
 
   loadLiveGames = () => {
-    API.getLiveGames('10', 'PIT')
-    .then(res => this.setState({livedata: res.data}))
-    .catch(err => console.log(err));
+    
+    if(this.state.user == "" || this.state.team == "") return;
+
+    API.getLiveGames('11', 'SEA')
+      .then(res => this.setState({ livedata: res.data }))
+      .catch(err => console.log(err));
   }
 
   pointConversion = (player) => {
@@ -91,8 +95,11 @@ class Games extends Component {
   }
   // loads specific players from API //
   loadPlayer = () => {
+    
+    if(this.state.user == "" || this.state.team == "") return;
+
     console.log("loaded");
-    var teamArray = [13320, 16802, 18877, 3807, 11056, 18983];
+    var teamArray = [2593, 16470, 19045, 14536, 16830, 19119];
     var players = [];
 
     for (var i = 0; i < teamArray.length; i++) {
@@ -109,9 +116,10 @@ class Games extends Component {
   };
 
   loadGames = () => {
+    // alert("what?????");
     API.getGames()
       .then(res => {
-        this.setState({ games: res.data, user: "", team: "" })
+        this.setState({ games: res.data })
 
       })
       .catch(err => console.log(err));
@@ -138,17 +146,32 @@ class Games extends Component {
         team: this.state.team,
         players: this.state.players
       })
-        .then(res => this.loadGames())
+        .then(res => {
+          
+          this.setState({ 
+            user: res.user,
+            team: res.team
+          });
+
+          this.loadPlayer();
+          this.loadLiveGames();
+          
+        })
         .catch(err => console.log(err));
     }
   };
 
   render() {
+    
+    var counter = 0;
+    var scoreTotal = 0;
+
     return (
       <div>
         <div >
           <br></br>
           <Col sm={4}>
+      <form>
             <Input size="sm" style={styles.inputStyles}
               value={this.state.User}
               onChange={this.handleInputChange}
@@ -162,11 +185,13 @@ class Games extends Component {
               name="team"
               placeholder="Team (required)"
             />
+      </form>
           </Col>
         </div>
         <br></br>
         <div>
           <Col md={8}>
+      <form>
             <Table bordered style={styles.tableStyles}>
               <thead>
                 <tr>
@@ -185,46 +210,61 @@ class Games extends Component {
               <tbody>
                 {this.state.players.sort(function (a, b) {
                   return a["name"].localeCompare(b["name"]);
-                }).map(player => (
-                  <tr key={player.id}>
-                    <th scope="row">{player.id}</th>
-                    <td> {player.name}</td>
-                    <td> {player.position}</td>
-                    <td> {player.passingYards}</td>
-                    <td> {player.passingTouchdowns}</td>
-                    <td> {player.rushingYards}</td>
-                    <td> {player.rushingTouchdowns}</td>
-                    <td> {player.receivingYards}</td>
-                    <td> {player.receivingTouchdowns}</td>
-                    <td> {player.points}</td>
-                  </tr>
-                ))}
+                }).map(player => {
+                  
+                  scoreTotal = scoreTotal + player.points;
+                  counter++;
+
+                  return (
+                      <tr key={player.id}>
+                        <th scope="row"> {counter} {player.id} </th>
+                        <td> {player.name}</td>
+                        <td> {player.position}</td>
+                        <td> {player.passingYards}</td>
+                        <td> {player.passingTouchdowns}</td>
+                        <td> {player.rushingYards}</td>
+                        <td> {player.rushingTouchdowns}</td>
+                        <td> {player.receivingYards}</td>
+                        <td> {player.receivingTouchdowns}</td>
+                        <td> {player.points}</td>
+                      </tr>
+                  );
+                  
+                  })}
+                  {scoreTotal > 0 ? <tr><td colspan="10" align="right">{scoreTotal} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td></tr> : ''}
               </tbody>
             </Table>
+            <FormBtn
+                disabled={!(this.state.user && this.state.team)}
+                onClick={this.handleFormSubmit}
+              >
+                 Team
+              </FormBtn>
+      </form>
           </Col>
         </div>
 
 
-    <div style={styles.introStyles}>
-            <br></br>
-            <br></br>
-            <h4> SCORE </h4>
-            <div>Home: {this.state.livedata.awayScore}</div>
-            <div>Away: {this.state.livedata.homeScore}</div>
-            <br></br>
-            <h4> GAME STATS </h4>
-            <div>forecast: {this.state.livedata.forecastDescription}</div>
-            <div>Low: {this.state.livedata.forecastTempLow}</div>
-            <div>High: {this.state.livedata.forecastTempHigh}</div>
-            <div>Wind Chill: {this.state.livedata.forecastWindChill}</div>
-            <div>Wind Speed: {this.state.livedata.forecastWindSpeed}</div>
-            <div>Time Left: {this.state.livedata.timeRemaining}</div>
-            <div>Quarter: {this.state.livedata.quarter}</div>
-            <div>Down: {this.state.livedata.down}</div>
-            <div>Yard Line: {this.state.livedata.yardLine}</div>
-            <div>Updated: {this.state.livedata.astUpdated}</div>
-            
-          </div>
+        <div style={styles.introStyles}>
+          <br></br>
+          <br></br>
+          <h4> SCORE </h4>
+          <div>Home: {this.state.livedata.awayScore}</div>
+          <div>Away: {this.state.livedata.homeScore}</div>
+          <br></br>
+          <h4> GAME STATS </h4>
+          <div>forecast: {this.state.livedata.forecastDescription}</div>
+          <div>Low: {this.state.livedata.forecastTempLow}</div>
+          <div>High: {this.state.livedata.forecastTempHigh}</div>
+          <div>Wind Chill: {this.state.livedata.forecastWindChill}</div>
+          <div>Wind Speed: {this.state.livedata.forecastWindSpeed}</div>
+          <div>Time Left: {this.state.livedata.timeRemaining}</div>
+          <div>Quarter: {this.state.livedata.quarter}</div>
+          <div>Down: {this.state.livedata.down}</div>
+          <div>Yard Line: {this.state.livedata.yardLine}</div>
+          <div>Updated: {this.state.livedata.astUpdated}</div>
+
+        </div>
 
       </div>
     );

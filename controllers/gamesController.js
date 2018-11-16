@@ -87,9 +87,9 @@ module.exports = {
       res.json(returnValues);
     })
   },
-  
+
   injuries: function (req, res) {
-    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/10 ?";
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/11 ?";
     fantasydata(url, function (data) {
       // const news = data.data;
       // const frontEndResponse = [];
@@ -141,8 +141,6 @@ module.exports = {
 
   },
 
-
-
   // Player API URL with loop to grab 6 players
   player: function (req, res) {
 
@@ -169,12 +167,11 @@ module.exports = {
 
   },
 
-
   // Team API URL 
   team: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/10/PIT";
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/11/SEA";
     // + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {
@@ -192,7 +189,6 @@ module.exports = {
       res.json(returnValues);
     });
   }
-
 
 }; //end module export
 

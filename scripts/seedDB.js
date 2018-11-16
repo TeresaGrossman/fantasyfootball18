@@ -10,14 +10,13 @@ mongoose.connect(
 
 const userSeed = [
   {
-   user: "richie rich",
-   team: "McGruffs",
+    user: "richie rich",
+    team: "McGruffs",
     players:
       "",
     date: new Date(Date.now())
   },
-  
-  
+
 ];
 
 db.User
