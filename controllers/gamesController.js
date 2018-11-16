@@ -89,7 +89,7 @@ module.exports = {
   },
 
   injuries: function (req, res) {
-    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/9?";
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/11?";
     fantasydata(url, function (data) {
       // const news = data.data;
       // const frontEndResponse = [];
@@ -171,7 +171,7 @@ module.exports = {
   team: function (req, res) {
 
     var fantasydata = require("../external/fantasydata.js");
-    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/10/PIT";
+    var url = "https://api.fantasydata.net/v3/nfl/stats/JSON/PlayerGameStatsByTeam/2018REG/11/SEA";
     // + req.params.week_id + "/" + req.params.id;
     fantasydata(url, function (data) {
       var returnValues = {

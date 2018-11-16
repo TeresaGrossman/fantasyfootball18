@@ -50,10 +50,11 @@ class Games extends Component {
   };
 
   componentDidMount() {
-    // this.loadGames();
+    this.loadGames();
     this.loadPlayer();
     this.loadLiveGames();
     // setInterval(this.loadPlayer, 60000);
+    // setInterval(this.loadLiveGames, 60000);
 
   }
 
@@ -115,7 +116,7 @@ class Games extends Component {
   };
 
   loadGames = () => {
-    alert("what?????");
+    // alert("what?????");
     API.getGames()
       .then(res => {
         this.setState({ games: res.data })

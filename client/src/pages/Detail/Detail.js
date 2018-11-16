@@ -30,20 +30,22 @@ class Detail extends Component {
       .catch(err => console.log(err));
   }
 
-
   render() {
     return (
       <Container fluid>
-      <br></br>
 <div style={styles.introStyles}>
-<h1 style={styles.logoStyles} align="center">
-</h1></div>
-
+<h1 style={styles.logoStyles} align="center"></h1>
+</div>
+<Row>
+  <Col size="md-12">
+  <img src='../../images/logo3.png' height='115px' style={{ float: 'right' }} />
+  </Col>
+</Row>
         <Row>
           <Col size="md-6">
             <div style={styles.introStyles}>
               <h4>The Game</h4>
-              Are you ready for some Fantasy Football but don't don't want to hassle with a long season and worrying about a whole bunch of players and how good they are? Our app chooses the players for you from the game being played and adds points to your team as the player's performance progresses. Think of it as the "Scratcher" of Fantasy Football! You don't have to be an expert or an avid football fan to play! We'll randomly select the players and at the end your points will be added to the team you've created. The next game will have a whole new squad to rack up points!
+              Are you ready for some Fantasy Football! BUT... don't want to hassle with a long season and worrying what players who and how good they are and if you're making the right choice? Our app chooses the players for you from the game being played and adds points to your team as the player's performance progresses. Think of it as the "Scratcher" of Fantasy Football! You don't have to be an expert or an avid football fan to play! We'll randomly select the players and at the end your points will be added to the team you've created. The next game will have a whole new squad to rack up points!
             </div>
           </Col>
           <Col size="md-6">
