@@ -89,7 +89,7 @@ module.exports = {
   },
   
   injuries: function (req, res) {
-    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/9?";
+    const url = "https://api.fantasydata.net/v3/nfl/stats/JSON/Injuries/2018reg/10 ?";
     fantasydata(url, function (data) {
       // const news = data.data;
       // const frontEndResponse = [];
