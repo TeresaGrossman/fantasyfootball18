@@ -1,4 +1,5 @@
 var request = require("request");
+require("dotenv").config();
 
 function doFantasyAPI(url, cb) {
 console.log(process.env.key);
